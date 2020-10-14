@@ -6,26 +6,51 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Button, TextInput } from 'react-native';
-
-
+import React, { Component, useState } from 'react';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import Header from './components/header'
+import TodoItem from './components/todoItem'
 const App = () => {
 
-  const [name, setName] = useState('mario')
-  const [age, setAge] = useState('30')
 
-  const clickHandler = () => {
-    setPerson({name:'luigi', age: (person.age +1)})
+  const [todos, setTodos] = useState([
+    { text: 'buy coffee', key: '1' },
+    { text: 'create an app', key: '2' },
+    { text: 'play on the switch', key: '3' },
+  ])
+
+  const pressHandler = (key) =>{
+    setTodos((prevTodos) => {
+      return prevTodos.filter(todos => todos.key != key)
+    })
   }
+
+  // const pressHandler = (key) => {
+  //   console.log(key);
+  //   // Haciendo uso de la funcion setPeople coge todos los elementos
+  //   // del array menos el elemento que se ha tocado haciendo uso de
+  //   // la funcion filter
+  //   setPeople((prevPeople) => {
+  //     return prevPeople.filter(person => person.key != key)
+  //   })
+  // }
 
   return (
     <View style={styles.container}>
-      <Text>His name is {name}  and his age is {age}</Text>
-      <TextInput/>
-      <View style={styles.buttonContainer}>
-        <Button title='Update name' onPress={clickHandler} />
+      {/* header */}
+      <Header />
+      <View style={styles.content}>
+        {/* form */}
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => (
+              <TodoItem item={item} pressHandler={pressHandler}/>
+            )} />
+        </View>
+
       </View>
+
     </View>
   );
 };
@@ -33,12 +58,15 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderStartColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#fff',
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
-  buttonContainer: {
-    marginTop: 20
+  content: {
+    padding: 40,
+  },
+  list: {
+    marginTop: 20,
   }
 });
 
