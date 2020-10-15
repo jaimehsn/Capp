@@ -10,30 +10,28 @@ import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import Header from './components/header'
 import TodoItem from './components/todoItem'
+import AddTodo from './components/addTodo'
+
 const App = () => {
 
+  const [todos, setTodos] = useState([])
 
-  const [todos, setTodos] = useState([
-    { text: 'buy coffee', key: '1' },
-    { text: 'create an app', key: '2' },
-    { text: 'play on the switch', key: '3' },
-  ])
-
-  const pressHandler = (key) =>{
+  const pressHandler = (key) => {
     setTodos((prevTodos) => {
+      console.log(key)
       return prevTodos.filter(todos => todos.key != key)
     })
   }
 
-  // const pressHandler = (key) => {
-  //   console.log(key);
-  //   // Haciendo uso de la funcion setPeople coge todos los elementos
-  //   // del array menos el elemento que se ha tocado haciendo uso de
-  //   // la funcion filter
-  //   setPeople((prevPeople) => {
-  //     return prevPeople.filter(person => person.key != key)
-  //   })
-  // }
+  const submitHandler = (text) => {
+    setTodos((prevTodos) => {
+      return [
+        ...prevTodos,
+        {text: text, key: ((prevTodos.length)+1).toString()},
+      ]
+    })
+
+  }
 
   return (
     <View style={styles.container}>
@@ -41,11 +39,12 @@ const App = () => {
       <Header />
       <View style={styles.content}>
         {/* form */}
+        <AddTodo submitHandler={submitHandler} />
         <View style={styles.list}>
           <FlatList
             data={todos}
             renderItem={({ item }) => (
-              <TodoItem item={item} pressHandler={pressHandler}/>
+              <TodoItem item={item} pressHandler={pressHandler} />
             )} />
         </View>
 
