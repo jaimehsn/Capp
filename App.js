@@ -7,15 +7,17 @@
  */
 
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, FlatList, Alert, TouchableWithoutFeedback, Keyboard,  } from 'react-native';
-import Header from './components/header'
+import { StyleSheet, View, Text, FlatList, Alert, TouchableWithoutFeedback, Keyboard, } from 'react-native';
 import TodoItem from './components/todoItem'
 import AddTodo from './components/addTodo'
-import Icon from 'react-native-vector-icons/FontAwesome'
+
 
 const App = () => {
 
-  const [todos, setTodos] = useState([])
+  const [todos, setTodos] = useState([
+    { text: 'Cliente 1', state: '0', key: '1' },
+    { text: 'Cliente 2', state: '1', key: '2' }
+  ])
 
   const pressHandler = (key) => {
     setTodos((prevTodos) => {
@@ -38,31 +40,24 @@ const App = () => {
         { text: 'Ok', onPress: () => console.log('alert closed') }
       ])
     }
-
-
-
   }
 
   return (
     // <Sandbox/>
     <TouchableWithoutFeedback onPress={() => {
-      Keyboard.dismiss();
-      console.log("dismissed keyboard")
+      Keyboard.dismiss()
     }}>
       <View style={styles.container}>
-        {/* header */}
-        <Header />
-        <Icon name="check-circle" size={30} color="#000" />
-        <View style={styles.content}>
-          {/* form */}
+        {/* para poner iconos <Icon name="check-circle" size={30} color="#000" /> */}
+        {/* <View style={styles.content}>
           <AddTodo submitHandler={submitHandler} />
-          <View style={styles.list}>
-            <FlatList
-              data={todos}
-              renderItem={({ item }) => (
-                <TodoItem item={item} pressHandler={pressHandler} />
-              )} />
-          </View>
+        </View> */}
+        <View style={styles.list}>
+          <FlatList
+            data={todos}
+            renderItem={({ item }) => (
+              <TodoItem item={item} pressHandler={pressHandler} />
+            )} />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -75,14 +70,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   content: {
+    flex: 1,
     padding: 40,
-    
-    flex:1
   },
   list: {
-    marginTop: 20,
-    
-    flex:1,
+    flex: 1,
   }
 });
 
