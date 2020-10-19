@@ -10,7 +10,7 @@ const hh = fecha.getHours();
 const min = fecha.getMinutes();
 
 const state = ['play-circle', 'pause-circle', 'check-circle']
-const color = ['tblue', 'yellow', 'green']
+const color = ['#00A3FF', '#FCF200', '#40C800']
 
 const TodoItem = ({ item, pressHandler }) => {
     return (
@@ -20,7 +20,7 @@ const TodoItem = ({ item, pressHandler }) => {
                 <Text style={styles.title}>{item.text}</Text>
             </View>
             <View style={styles.content}>
-                <Icon name={state[item.state]} size={50} color="#fff" />
+                <Icon name={state[item.state]} size={60} color="#fff" />
                 <Text >{dd}/{mm}/{yyyy} | {hh}:{min}</Text>
             </View>
 
