@@ -14,16 +14,16 @@ const color = ['#00A3FF', '#FCF200', '#40C800']
 
 const TodoItem = ({ item, pressHandler }) => {
     return (
-        <TouchableOpacity style={[{backgroundColor:color[item.state]},styles.container]} onPress={() => { }}>
+        <TouchableOpacity style={[{ backgroundColor: color[item.state] }, styles.container]} onPress={() => { pressHandler(item.key) }}>
 
             <View style={styles.header}>
                 <Text style={styles.title}>{item.text}</Text>
             </View>
+            
             <View style={styles.content}>
                 <Icon name={state[item.state]} size={60} color="#fff" />
                 <Text >{dd}/{mm}/{yyyy} | {hh}:{min}</Text>
             </View>
-
 
         </TouchableOpacity>
     )
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         marginTop: 16,
         borderRadius: 10,
-        paddingBottom:10,
+        paddingBottom: 10,
     },
     header: {
         flex: 1,
@@ -47,9 +47,9 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 1,
-        flexDirection:'row',
-        justifyContent:'space-around',
-        alignItems:'flex-end'
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'flex-end'
     },
 
 })
