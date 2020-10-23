@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import TodoItem from '../components/todoItem'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 const Home = ({ navigation }) => {
 
@@ -13,13 +14,31 @@ const Home = ({ navigation }) => {
         { text: 'Cliente 3', state: '2', key: '6' },
         { text: 'Cliente 3', state: '2', key: '7' },
         { text: 'Cliente 3', state: '2', key: '8' },
-        { text: 'Cliente 3', state: '2', key: '9' },
-        { text: 'Last', state: '2', key: '10' },
+        { text: 'Last', state: '2', key: '9' },
 
     ])
 
-    const pressHandler = (key) => {
-        navigation.navigate('Form')
+    const pressHandler = (item) => {
+        navigation.navigate('Form', {
+            item: item,
+        })
+        console.log(item.key)
+    }
+
+    const pressOnIcon = (item) => {
+        // setTodos(todos.map(todo=>{
+        //     todo.key === item.key 
+        // })
+    }
+
+    const footer = () => {
+        return (
+            <View style={styles.FlatListFooter}>
+                <View>
+                    <Icon name={'plus'} size={100} color="lightgray" />
+                </View>
+            </View>
+        )
     }
 
     return (
@@ -27,11 +46,15 @@ const Home = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.list}>
                 <FlatList
+                    style={styles.flatListStyle}
                     data={todos}
+                    ListFooterComponent={footer}
                     renderItem={({ item }) => (
-                        <TodoItem item={item} pressHandler={pressHandler} />
+                        <TodoItem item={item} pressHandler={pressHandler} pressOnIcon={pressOnIcon} />
                     )} />
             </View>
+            <Icon name={'history'} size={100} color="gray" style={styles.floatingButtonHistory} />
+
         </View>
     );
 }
@@ -39,7 +62,9 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'row',
         backgroundColor: '#fff',
+
     },
     content: {
         flex: 1,
@@ -47,7 +72,17 @@ const styles = StyleSheet.create({
     },
     list: {
         flex: 1,
-    }
+
+    },
+    FlatListFooter: {
+        justifyContent: 'center',
+    },
+    floatingButtonHistory: {
+        position: 'absolute',
+        right: 30,
+        bottom: 30,
+    },
+
 })
 
 

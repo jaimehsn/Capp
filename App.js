@@ -16,27 +16,21 @@ import Form from './screens/form'
 const stackNav = createStackNavigator();
 
 const App = () => {
+  // const submitHandler = (text) => {
 
-
-
-
-
-  const submitHandler = (text) => {
-
-    if (text.length > 3) {
-      setTodos((prevTodos) => {
-        return [
-          ...prevTodos,
-          { text: text, key: ((prevTodos.length) + 1).toString() },
-        ]
-      })
-    } else {
-      Alert.alert('OOPS!', 'La tarea tiene que tener más de 3 letras.', [
-        { text: 'Ok', onPress: () => console.log('alert closed') }
-      ])
-    }
-  }
-
+  //   if (text.length > 3) {
+  //     setTodos((prevTodos) => {
+  //       return [
+  //         ...prevTodos,
+  //         { text: text, key: ((prevTodos.length) + 1).toString() },
+  //       ]
+  //     })
+  //   } else {
+  //     Alert.alert('OOPS!', 'La tarea tiene que tener más de 3 letras.', [
+  //       { text: 'Ok', onPress: () => console.log('alert closed') }
+  //     ])
+  //   }
+  // }
   return (
     <NavigationContainer>
       <stackNav.Navigator screenOptions={{
@@ -48,19 +42,5 @@ const App = () => {
     </NavigationContainer>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  content: {
-    flex: 1,
-    padding: 40,
-  },
-  list: {
-    flex: 1,
-  }
-});
 
 export default App;

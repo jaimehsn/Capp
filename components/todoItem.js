@@ -12,16 +12,16 @@ const min = fecha.getMinutes();
 const state = ['play-circle', 'pause-circle', 'check-circle']
 const color = ['#00A3FF', '#FCF200', '#40C800']
 
-const TodoItem = ({ item, pressHandler }) => {
+const TodoItem = ({ item, pressHandler, pressOnIcon }) => {
     return (
-        <TouchableOpacity style={[{ backgroundColor: color[item.state] }, styles.container]} onPress={() => { pressHandler(item.key) }}>
+        <TouchableOpacity style={[{ backgroundColor: color[item.state] }, styles.container]} onPress={() => { pressHandler(item) }}>
 
             <View style={styles.header}>
                 <Text style={styles.title}>{item.text}</Text>
             </View>
-            
+
             <View style={styles.content}>
-                <Icon name={state[item.state]} size={60} color="#fff" />
+                <Icon name={state[item.state]} size={60} color="#fff" onPress={() => { pressOnIcon(item) }} />
                 <Text >{dd}/{mm}/{yyyy} | {hh}:{min}</Text>
             </View>
 
