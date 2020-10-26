@@ -20,7 +20,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <stackNav.Navigator screenOptions={{
-        headerShown: true
+        headerShown: true,
       }}>
         <stackNav.Screen name='Home' component={Home} options={{
           title: 'Inicio',

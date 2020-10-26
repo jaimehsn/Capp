@@ -3,11 +3,8 @@ import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const Form = ({ route, navigation }) => {
-    const { item } = route.params
+    const { item,trashHandler } = route.params
 
-    const fileHandler = () => {
-        
-    }
     return (
 
         <View style={styles.container}>
@@ -37,7 +34,10 @@ const Form = ({ route, navigation }) => {
                 </TextInput>
                 <View style={styles.controls}>
                     <Icon name={'play-circle'} size={40} color="#00A3FF" />
-                    <Icon name={'trash-alt'} size={40} color="#FF0000" />
+                    <Icon name={'trash-alt'} size={40} color="#FF0000" onPress={() =>{
+                        trashHandler(item.key)
+                        navigation.goBack()
+                    }} />
                 </View>
             </ScrollView>
 
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 15,
     },
-    fileTextArea:{
+    fileTextArea: {
         backgroundColor: 'white',
         borderRadius: 15,
     },
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         paddingVertical: 20,
     },
-
+    
 })
 
 
