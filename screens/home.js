@@ -36,6 +36,7 @@ const Home = ({ navigation }) => {
             <View style={styles.FlatListFooter}>
                 <View>
                     <Icon name={'plus'} size={100} color="lightgray" />
+                   
                 </View>
             </View>
         )
@@ -53,7 +54,6 @@ const Home = ({ navigation }) => {
                         <TodoItem item={item} pressHandler={pressHandler} pressOnIcon={pressOnIcon} />
                     )} />
             </View>
-            <Icon name={'history'} size={100} color="gray" style={styles.floatingButtonHistory} />
 
         </View>
     );
@@ -75,7 +75,9 @@ const styles = StyleSheet.create({
 
     },
     FlatListFooter: {
-        justifyContent: 'center',
+        flex:1,
+        justifyContent:"center",
+        alignItems:'center',
     },
     floatingButtonHistory: {
         position: 'absolute',

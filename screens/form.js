@@ -4,6 +4,10 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const Form = ({ route, navigation }) => {
     const { item } = route.params
+
+    const fileHandler = () => {
+        
+    }
     return (
 
         <View style={styles.container}>
