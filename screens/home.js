@@ -29,7 +29,7 @@ const Home = ({ navigation }) => {
     const pressHandler = (item) => {
         navigation.navigate('Form', {
             item: item,
-            trashHandler: trashHandler,
+            trashHandler: JSON.stringify(trashHandler),
         })
         console.log(item.key)
     }
