@@ -3,41 +3,62 @@ import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TextInput } 
 import TodoItem from '../components/todoItem'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+
 const Home = ({ navigation }) => {
 
     const [todos, setTodos] = useState([
         { text: 'Cliente 1', state: '0', key: '1' },
         { text: 'Cliente 2', state: '1', key: '2' },
         { text: 'Cliente 3', state: '2', key: '3' },
-        { text: 'Cliente 3', state: '2', key: '4' },
-        { text: 'Cliente 3', state: '2', key: '5' },
-        { text: 'Cliente 3', state: '2', key: '6' },
-        { text: 'Cliente 3', state: '2', key: '7' },
-        { text: 'Cliente 3', state: '2', key: '8' },
         { text: 'Last', state: '2', key: '9' },
-
     ])
+    const [newName, setNewName] = useState('')
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    const trashHandler = (key) =>{
-        setTodos((prevTodos)=>{
-            return prevTodos.filter(item => item.key != key )
+    const newTodo = (nombre) => {
+        setTodos((prevTodos) => {
+            return [{ text: nombre, state: '0', key: ((todos.length) + 1).toString() }, ...prevTodos]
+        })
+    }
+    const modObj = (todo, keyTarget) => {
+        if (todo.key == keyTarget) {
+            return { text: todo.text, state: '0', key: todo.key }
+        } else {
+            return todo
+        }
+    }
+
+    const trashHandler = (key) => {
+        setTodos((prevTodos) => {
+            return prevTodos.filter(item => item.key != key)
         })
     }
 
     const pressHandler = (item) => {
         navigation.navigate('Form', {
             item: item,
-            trashHandler: JSON.stringify(trashHandler),
+            trashHandler: trashHandler,
         })
         console.log(item.key)
     }
 
     const pressOnIcon = (item) => {
-        // setTodos(todos.map(todo=>{
-        //     todo.key === item.key 
-        // })
+        setTodos(todos.map((todo) => {
+            if (todo.key == item.key) {
+                if(todo.state =='2'){
+                    return todo
+                }else{
+                    if (todo.state == '0') {
+                        return { text: todo.text, state: '1', key: todo.key }
+                    } else {
+                        return { text: todo.text, state: '0', key: todo.key }
+                    }
+                }
+            } else {
+                return todo
+            }
+        }))
     }
 
     const footer = () => {
@@ -78,10 +99,14 @@ const Home = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.modalBody}>
-                            <TextInput style={styles.inputModal} placeholder={"Nombre del afectado"}></TextInput>
+                            <TextInput style={styles.inputModal} placeholder={"Nombre del afectado"} onChangeText={(val) => {
+                                setNewName(val)
+                            }}></TextInput>
                             <TouchableOpacity
                                 onPress={() => {
                                     setModalVisible(!modalVisible);
+                                    newTodo(newName)
+                                    console.log(newName)
                                 }}
                             >
                                 <Icon name={'check'} size={50} color="#40C800" />
@@ -169,8 +194,8 @@ const styles = StyleSheet.create({
         alignItems: 'stretch'
     },
     modalBody: {
-        
-        alignItems:'center'
+
+        alignItems: 'center'
     },
 
 })

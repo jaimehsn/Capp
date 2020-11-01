@@ -13,6 +13,11 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Home from './screens/home'
 import Form from './screens/form'
+import { YellowBox } from 'react-native';
+
+YellowBox.ignoreWarnings([
+  'Non-serializable values were found in the navigation state',
+]);
 
 const stackNav = createStackNavigator();
 

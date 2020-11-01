@@ -1,10 +1,13 @@
 import React, { Component, useState } from 'react';
 import { StyleSheet, View, Text, TextInput, ScrollView } from 'react-native';
+import { State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const Form = ({ route, navigation }) => {
     const { item, trashHandler } = route.params
-    const pTrashHandler = JSON.parse(trashHandler)
+
+    const state = ['play-circle', 'pause-circle', 'check-circle']
+    const color = ['#00A3FF', '#FCF200', '#40C800']
 
     return (
 
@@ -34,10 +37,9 @@ const Form = ({ route, navigation }) => {
                     style={styles.fileTextArea}>
                 </TextInput>
                 <View style={styles.controls}>
-                    <Icon name={'play-circle'} size={40} color="#00A3FF" />
+                    <Icon name={state[item.state]} size={40} color={color[item.state]} />
                     <Icon name={'trash-alt'} size={40} color="#FF0000" onPress={() => {
-                        pTrashHandler(item.key)
-                        
+                        trashHandler(item.key)
                         navigation.goBack()
                     }} />
                 </View>
