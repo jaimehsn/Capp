@@ -6,12 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 const Home = ({ navigation }) => {
 
-    const [todos, setTodos] = useState([
-        { text: 'Cliente 1', state: '0', key: '1' },
-        { text: 'Cliente 2', state: '1', key: '2' },
-        { text: 'Cliente 3', state: '2', key: '3' },
-        { text: 'Last', state: '2', key: '9' },
-    ])
+    const [todos, setTodos] = useState([])
     const [newName, setNewName] = useState('')
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -179,7 +174,7 @@ const styles = StyleSheet.create({
     inputModal: {
         borderBottomWidth: 2,
         borderColor: 'lightgray',
-        width: 200,
+        width: 250,
         fontSize: 20,
         marginBottom: 10
     },
