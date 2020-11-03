@@ -4,7 +4,8 @@ import { State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const Form = ({ route, navigation }) => {
-    const { item, trashHandler } = route.params
+    const { item, trashHandler, pressOnIcon } = route.params
+    const [todo, setTodo] = useState(item)
 
     const state = ['play-circle', 'pause-circle', 'check-circle']
     const color = ['#00A3FF', '#FCF200', '#40C800']
@@ -13,8 +14,13 @@ const Form = ({ route, navigation }) => {
 
         <View style={styles.container}>
             <View style={styles.header}>
-                <Icon name={'signature'} size={30} color="#fff" />
-                <Text style={styles.fileText}>{item.text}</Text>
+                <Icon name={'signature'} size={30} color="#fff" onPress={() => {
+                    pressOnIcon({ text: todo.text, state: '2', key: todo.key })
+                    setTodo({ text: todo.text, state: '2', key: todo.key })
+                    navigation.goBack()
+
+                }} />
+                <Text style={styles.fileText}>{todo.text}</Text>
                 <Icon name={'times-circle'} size={40} color="#fff" onPress={() => { navigation.goBack() }} />
             </View>
             <ScrollView style={styles.files}>
@@ -37,7 +43,16 @@ const Form = ({ route, navigation }) => {
                     style={styles.fileTextArea}>
                 </TextInput>
                 <View style={styles.controls}>
-                    <Icon name={state[item.state]} size={40} color={color[item.state]} />
+                    <Icon name={state[todo.state]} size={40} color={color[todo.state]} onPress={() => {
+                        pressOnIcon(todo)
+                        if (todo.state != '2') {
+                            if (todo.state == '0') {
+                                setTodo({ text: todo.text, state: '1', key: todo.key })
+                            } else {
+                                setTodo({ text: todo.text, state: '0', key: todo.key })
+                            }
+                        }
+                    }} />
                     <Icon name={'trash-alt'} size={40} color="#FF0000" onPress={() => {
                         trashHandler(item.key)
                         navigation.goBack()

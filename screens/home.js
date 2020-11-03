@@ -21,13 +21,6 @@ const Home = ({ navigation }) => {
             return [{ text: nombre, state: '0', key: ((todos.length) + 1).toString() }, ...prevTodos]
         })
     }
-    const modObj = (todo, keyTarget) => {
-        if (todo.key == keyTarget) {
-            return { text: todo.text, state: '0', key: todo.key }
-        } else {
-            return todo
-        }
-    }
 
     const trashHandler = (key) => {
         setTodos((prevTodos) => {
@@ -39,24 +32,25 @@ const Home = ({ navigation }) => {
         navigation.navigate('Form', {
             item: item,
             trashHandler: trashHandler,
+            pressOnIcon: pressOnIcon,
         })
         console.log(item.key)
     }
 
     const pressOnIcon = (item) => {
-        setTodos(todos.map((todo) => {
-            if (todo.key == item.key) {
-                if(todo.state =='2'){
-                    return todo
+        setTodos(todos.map((preTodo) => {
+            if (preTodo.key == item.key) {
+                if(item.state =='2'){
+                    return item
                 }else{
-                    if (todo.state == '0') {
-                        return { text: todo.text, state: '1', key: todo.key }
+                    if (preTodo.state == '0') {
+                        return { text: preTodo.text, state: '1', key: preTodo.key }
                     } else {
-                        return { text: todo.text, state: '0', key: todo.key }
+                        return { text: preTodo.text, state: '0', key: preTodo.key }
                     }
                 }
             } else {
-                return todo
+                return preTodo
             }
         }))
     }
