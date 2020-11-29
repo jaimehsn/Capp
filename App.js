@@ -27,6 +27,7 @@ const App = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
+
     <NavigationContainer>
 
       <stackNav.Navigator screenOptions={{
@@ -61,7 +62,7 @@ const App = () => {
         ) : (
             <stackNav.Screen name='login' component={Login} options={{
               headerShown: false
-            }} />
+            }} initialParams={{ setLogin: setIsLogin, isLogin: isLogin }} />
           )}
 
       </stackNav.Navigator>
