@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TextInput } from 'react-native';
 import TodoItem from '../components/todoItem';
 import Icon from 'react-native-vector-icons/FontAwesome';
