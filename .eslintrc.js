@@ -1,32 +1,35 @@
 module.exports = {
   root: true,
-  parser: '@babel/eslint-parser', // Make sure eslint picks up the config at the root of the directory
+  parser: '@typescript-eslint/parser', // Make sure eslint picks up the config at the root of the directory
+  plugins: ['@typescript-eslint', 'react-hooks', 'prettier'],
   parserOptions: {
-    sourceType: 'module',
-    allowImportExportEverywhere: false,
-    ecmaFeatures: {
-      globalReturn: false,
-    },
-    babelOptions: {
-      configFile: './babel.config.js',
-    },
+    project: './tsconfig.json',
   },
   settings: {
     react: {
       version: 'detect', // Automatically detect the react version
+    },
+    'import/resolver': {
+      'babel-module': {},
+      node: {
+        extensions: ['.d.ts'],
+      },
     },
   },
   env: {
     node: true,
   },
   extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended', // Make this the last element so prettier config overrides other formatting rules
+    '@react-native-community',
+    'airbnb-typescript',
+    'prettier',
+    'prettier/@typescript-eslint',
+    'prettier/react',
   ],
   rules: {
-    'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
-    'react/prop-types': [0],
+    'react/jsx-props-no-spreading': 0,
+    'react/prop-types': 0,
+    'eslint-comments/no-unlimited-disable': 0,
+    'eslint-comments/no-unused-disable': 0,
   },
 };

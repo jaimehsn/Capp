@@ -1,9 +1,7 @@
-import React, { Component, useState } from 'react';
-import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
-import { State } from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import React from 'react';
+import { StyleSheet, View, Text, TextInput } from 'react-native';
 
-const Login = ({ route, navigation }) => {
+const Login = ({ route }) => {
   const { setLogin, isLogin } = route.params;
   const enter = () => {
     setLogin(!isLogin);
