@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Props } from './types';
 
 const fecha = new Date();
 const dd = fecha.getDay();
@@ -12,12 +13,12 @@ const min = fecha.getMinutes();
 const state = ['play-circle', 'pause-circle', 'check-circle'];
 const color = ['#00A3FF', '#FCF200', '#40C800'];
 
-const TodoItem = ({ item, pressHandler, pressOnIcon }) => {
+const TodoItem: FC<Props> = ({ title, state, handlePress, handlePressIcon }) => {
   return (
     <TouchableOpacity
-      style={[{ backgroundColor: color[item.state] }, styles.container]}
+      style={[{ backgroundColor: color[state] }, styles.container]}
       onPress={() => {
-        pressHandler(item);
+        handlePress(item);
       }}>
       <View style={styles.header}>
         <Text style={styles.title}>{item.text}</Text>
@@ -29,7 +30,7 @@ const TodoItem = ({ item, pressHandler, pressOnIcon }) => {
           size={60}
           color="#fff"
           onPress={() => {
-            pressOnIcon(item);
+            handlePressIcon(item);
           }}
         />
         <Text>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList, TouchableOpacity, Modal, TextInput } from 'react-native';
-import TodoItem from '../components/todoItem';
+import { TodoItem } from 'components';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home = ({ navigation }) => {
@@ -11,7 +11,7 @@ const Home = ({ navigation }) => {
 
   const newTodo = (nombre) => {
     setTodos((prevTodos) => {
-      return [{ text: nombre, state: '0', key: (todos.length + 1).toString() }, ...prevTodos];
+      return [{ title: nombre, state: 'new'}, ...prevTodos];
     });
   };
 
@@ -114,7 +114,7 @@ const Home = ({ navigation }) => {
           data={todos}
           ListFooterComponent={footer}
           renderItem={({ item }) => (
-            <TodoItem item={item} pressHandler={pressHandler} pressOnIcon={pressOnIcon} />
+            <TodoItem handlePress={pressHandler}/>
           )}
         />
       </View>
